@@ -102,7 +102,7 @@ function signUp() {
 	var passwd = document.getElementById('password').value;
 
 	var xhr = new XMLHttpRequest();
-	var url = "ace04ab1b5894421290658418ac3ed4f-499717577.us-east-1.elb.amazonaws.com:4003/clientes/";
+	var url = "http://ace04ab1b5894421290658418ac3ed4f-499717577.us-east-1.elb.amazonaws.com:4003/clientes/";
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	xhr.onreadystatechange = function () {
