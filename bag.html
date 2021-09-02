@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Restaurant</title>
+
+	<!-- Normalize V8.0.1 -->
+	<link rel="stylesheet" href="./css/normalize.css">
+
+	<!-- MDBootstrap V5 -->
+	<link rel="stylesheet" href="./css/mdb.min.css">
+
+	<!-- Font Awesome V5.15.1 -->
+	<link rel="stylesheet" href="./css/all.css">
+
+	<!-- Sweet Alert V10.13.0 -->
+	<script src="./js/sweetalert2.js"></script>
+
+	<!-- General Styles -->
+	<link rel="stylesheet" href="./css/style.css">
+
+</head>
+
+<body onload="isLogedIn()">
+
+	<!-- Header -->
+	<header class="header full-box">
+		<div class="header-brand text-center full-box">
+			<a href="index.html">
+				<img src="./assets/img/logo.png" alt="logo" class="img-fluid">
+			</a>
+		</div>
+
+		<div class="header-options full-box">
+			<nav class="header-navbar full-box poppins-regular font-weight-bold">
+				<ul class="list-unstyled full-box">
+					<li>
+						<a href="index.html">Inicio<span class="full-box"></span></a>
+					</li>
+					<li>
+						<a href="menu.html">Menú<span class="full-box"></span></a>
+					</li>
+				</ul>
+			</nav>
+			<div class="header-button full-box text-center btn-login-menu">
+				<i class="fas fa-user-alt" onclick="show_popup_login()" data-mdb-toggle="tooltip"
+					data-mdb-placement="bottom" title="Login"></i>
+				<div class="div-bordered popup-login">
+
+					<div id="login">
+						<span class="text-center poppins-regular font-weight-bold">Inicio de sesión</span>
+						<form class="full-box" action="" id="miForm">
+							<div class="form-outline mb-4">
+								<input type="text" class="form-control" name="login_email_cliente" id="login_email"
+									maxlength="10" required="" placeholder="Cédula">
+							</div>
+							<div class="form-outline mb-4">
+								<input type="password" class="form-control" name="login_clave_cliente"
+									id="login_password" required="" placeholder="Contraseña">
+							</div>
+							<p class="text-center">
+								<button class="btn btn-info btn-sm w-100" onclick="login();show_popup_login()">Iniciar
+									sesión</button>
+							</p>
+						</form>
+						<hr>
+						<p class="text-center full-box">¿No tienes cuenta? <a href="registration.html">Regístrate
+								aquí</a>
+						</p>
+					</div>
+
+					<!-- Cerrar sesion -- -->
+					<div id="logout">
+
+						<div class="text-center full-box">
+							<i class="fas fa-user-circle fa-4x"></i>
+						</div>
+						<!-- <span class="poppins-regular font-weight-bold">Nombre de usuario</span> -->
+						<form class="full-box" action="">
+							<button class="btn btn-raised btn-primary btn-sm w-100"><i
+									class="fas fa-door-open fa-fw"></i>
+								&nbsp; Cerrar sesión</button>
+						</form>
+
+					</div>
+
+				</div>
+			</div>
+			<a href="bag.html" class="header-button full-box text-center" data-mdb-toggle="tooltip"
+				data-mdb-placement="bottom" title="Carrito">
+				<i class="fas fa-shopping-bag"></i>
+				<span class="badge bg-warning rounded-pill bag-count">2</span>
+			</a>
+		</div>
+	</header>
+
+
+	<!-- Content -->
+	<section class="container-cart ">
+		<div class="container container-web-page">
+			<h3 class="font-weight-bold poppins-regular text-uppercase">Carrito de compras</h3>
+			<hr>
+		</div>
+
+		<div class="container" style="padding-top: 40px;">
+
+			<div class="row">
+				<div class="col-12 col-md-7 col-lg-8">
+					<div class="row">
+						<table id="result">
+							<tr>
+								<th>Producto</th>
+								<th>Precio</th>
+								<th>Cantidad</th>
+								<th>Total</th>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="col-12 col-md-5 col-lg-4">
+					<div class="full-box div-bordered">
+						<h5 class="text-center text-uppercase bg-success" style="color: #FFF; padding: 10px 0;">Resumen
+							de la orden</h5>
+						<ul class="list-group bag-details">
+							<a
+								class="list-group-item d-flex justify-content-between align-items-center text-uppercase poppins-regular font-weight-bold">
+								Subtotal
+								<span id="subtotal"></span>
+							</a>
+							<a
+								class="list-group-item d-flex justify-content-between align-items-center text-uppercase poppins-regular font-weight-bold">
+								Envio
+								<span>$10.00</span>
+							</a>
+							<a class="list-group-item d-flex justify-content-between align-items-center"
+								style="border-bottom: 1px solid #E1E1E1;"></a>
+							<a
+								class="list-group-item d-flex justify-content-between align-items-center text-uppercase poppins-regular font-weight-bold">
+								Total
+								<span id="total"></span>
+							</a>
+						</ul>
+						<p class="text-center">
+							<button type="button" class="btn btn-primary">Confirmar orden</button>
+						</p>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+		<!-- Carrito vacio --
+	    <div class="container">
+	        <p class="text-center" ><i class="fas fa-shopping-bag fa-5x"></i></p>
+	        <h4 class="text-center poppins-regular font-weight-bold" >Carrito de compras vacío</h4>
+	    </div> -->
+	</section>
+
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-md-4">
+					<ul class="list-unstyled">
+						<li>
+							<h5 class="font-weight-bold"><i class="far fa-copyright"></i> Carlos Alfaro 2021</h5>
+						</li>
+						<li> Todos los derechos reservados </li>
+					</ul>
+				</div>
+				<div class="col-12 col-md-4">
+					<ul class="list-unstyled">
+						<li>
+							<h5 class="font-weight-bold">El Salvador</h5>
+						</li>
+						<li><i class="fas fa-map-marker-alt fa-fw"></i> San Salvador, El Salvador, Centro América</li>
+					</ul>
+				</div>
+				<div class="col-12 col-md-4">
+					<ul class="list-unstyled">
+						<li>
+							<h5 class="font-weight-bold">Siguenos en:</h5>
+						</li>
+						<li>
+							<a href="https://es-la.facebook.com/CarlosAlfaroES/" class="footer-link" target="_blank">
+								<i class="fab fa-facebook fa-fw"></i> Facebook
+							</a>
+						</li>
+
+						<li>
+							<a href="https://www.youtube.com/c/CarlosAlfaro007" class="footer-link" target="_blank">
+								<i class="fab fa-youtube fa-fw"></i>
+								Youtube
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script>
+		var resultado = JSON.parse(localStorage['carrito']);
+		var subtotal = 0;
+
+
+		resultado.forEach(element => {
+			subtotal = subtotal + (element.price * element.count);
+			console.log(element);
+			var carrito = document.getElementById("result");
+			var fila = document.createElement("tr");
+			var col1 = document.createElement("th");
+			col1.textContent = element.name;
+			var col2 = document.createElement("th");
+			col2.textContent = element.price;
+			var col3 = document.createElement("th");
+			col3.textContent = element.count;
+			var col4 = document.createElement("th");
+			col4.textContent = element.total;
+
+			carrito.appendChild(fila);
+			fila.appendChild(col1);
+			fila.appendChild(col2);
+			fila.appendChild(col3);
+			fila.appendChild(col4);
+
+		});
+		console.log(subtotal);
+		document.getElementById("subtotal").innerHTML = "$ " + subtotal;
+		var total = subtotal + 10;
+		document.getElementById("total").innerHTML = "$ " + total;
+	</script>
+	<!-- MDBootstrap V5 -->
+	<script src="./js/mdb.min.js"></script>
+
+
+	<!-- General scripts -->
+	<script src="./js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Trainee Shop</title>
+
+	<!-- Normalize V8.0.1 -->
+	<link rel="stylesheet" href="./css/normalize.css">
+
+	<!-- MDBootstrap V5 -->
+	<link rel="stylesheet" href="./css/mdb.min.css">
+
+	<!-- Font Awesome V5.15.1 -->
+	<link rel="stylesheet" href="./css/all.css">
+
+	<!-- Sweet Alert V10.13.0 -->
+	<script src="./js/sweetalert2.js"></script>
+
+	<!-- General Styles -->
+	<link rel="stylesheet" href="./css/style.css">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+		integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+		integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+		integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+		crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+		integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="./style.css">
+
+
+</head>
+
+<body onload="isLogedIn()">
+
+	<!-- Header -->
+	<header class="header full-box">
+		<div class="header-brand text-center full-box">
+			<a href="index.html">
+				<img src="./assets/img/logo.png" alt="logo" class="img-fluid">
+			</a>
+		</div>
+
+		<div class="header-options full-box">
+			<nav class="header-navbar full-box poppins-regular font-weight-bold">
+				<ul class="list-unstyled full-box">
+					<li>
+						<a href="index.html">Inicio<span class="full-box"></span></a>
+					</li>
+				</ul>
+			</nav>
+			<div class="header-button full-box text-center btn-login-menu" id="icon-login">
+				<i class="fas fa-user-alt" onclick="show_popup_login()" data-mdb-toggle="tooltip"
+					data-mdb-placement="bottom" title="Login"></i>
+				<div class="div-bordered popup-login">
+
+					<!-- Inicio de sesion -->
+					<div id="login">
+						<span class="text-center poppins-regular font-weight-bold">Inicio de sesión</span>
+						<form class="full-box" action="" id="miForm">
+							<div class="form-outline mb-4">
+								<input type="text" class="form-control" name="login_email_cliente" id="login_email"
+									maxlength="10" required="" placeholder="Cédula">
+							</div>
+							<div class="form-outline mb-4">
+								<input type="password" class="form-control" name="login_clave_cliente"
+									id="login_password" required="" placeholder="Contraseña">
+							</div>
+							<p class="text-center">
+								<button class="btn btn-info btn-sm w-100" onclick="login();show_popup_login()">Iniciar
+									sesión</button>
+							</p>
+						</form>
+						<hr>
+						<p class="text-center full-box">¿No tienes cuenta? <a href="registration.html">Regístrate
+								aquí</a>
+						</p>
+					</div>
+
+					<!-- Cerrar sesion -- -->
+					<div id="logout">
+
+						<div class="text-center full-box">
+							<i class="fas fa-user-circle fa-4x"></i>
+						</div>
+						<!-- <span class="poppins-regular font-weight-bold">Nombre de usuario</span> -->
+						<form class="full-box" action="">
+							<button class="btn btn-raised btn-primary btn-sm w-100"><i
+									class="fas fa-door-open fa-fw"></i>
+								&nbsp; Cerrar sesión</button>
+						</form>
+
+					</div>
+				</div>
+			</div>
+			<a href="bag.html" class="header-button full-box text-center" data-mdb-toggle="tooltip"
+				data-mdb-placement="bottom" title="Carrito">
+				<i class="fas fa-shopping-bag"></i>
+				<span class="total-count badge bg-warning rounded-pill bag-count"></span>
+			</a>
+		</div>
+	</header>
+
+
+	<!-- Content -->
+	<div class="container container-web-page">
+		<h3 class="font-weight-bold poppins-regular text-uppercase">Lista de productos</h3>
+		<nav class="navbar navbar-inverse bg-inverse fixed-top bg-faded"
+			style="background: transparent!important; right: 0; left: unset !important; top: 50%">
+			<div class="row">
+				<div class="col">
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart"><i
+							class="fas fa-shopping-bag"></i>(<span class="total-count"></span>)</button>
+				</div>
+			</div>
+		</nav>
+		<div class="container-cards full-box" style="padding-bottom: 40px;" id="productos">
+
+			<!-- aqui van los productos -->
+
+		</div>
+		<!-- Modal carrito -->
+		<div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<table class="show-cart table">
+
+						</table>
+						<div>Total price: $<span class="total-cart"></span></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<a href="bag.html">
+							<button type="buttons" class="btn btn-primary">Order now</button>
+						</a>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="saucerModal" tabindex="-1" aria-hidden="true" aria-labelledby="saucerModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="saucerModalLabel">Buscar platillo</h5>
+					<button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="form-outline mb-4">
+						<input type="text" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{4,25}" class="form-control"
+							name="buscar_platillo" id="buscar_platillo" maxlength="25">
+						<label for="buscar_platillo" class="form-label">¿Qué estás buscando?</label>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-mdb-dismiss="modal"><i
+							class="fas fa-times fa-fw"></i> &nbsp; Cerrar</button>
+					<button type="button" class="btn btn-info"><i class="fas fa-search fa-fw"></i> &nbsp;
+						Buscar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-md-4">
+					<ul class="list-unstyled">
+						<li>
+							<h5 class="font-weight-bold"><i class="far fa-copyright"></i> Trainee Shop 2021</h5>
+						</li>
+						<li> Todos los derechos reservados </li>
+					</ul>
+				</div>
+				<div class="col-12 col-md-4">
+					<ul class="list-unstyled">
+						<li>
+							<h5 class="font-weight-bold">Ecuador</h5>
+						</li>
+						<li><i class="fas fa-map-marker-alt fa-fw"></i> Quito, Ecuador</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+	<!-- MDBootstrap V5 -->
+	<script src="./js/mdb.min.js"></script>
+
+	<script src="./js/showProducts.js"></script>
+
+	<script src="./js/shoppingCart.js"></script>
+
+	<!-- General scripts -->
+	<script src="./js/main.js"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+	<script src="./script.js"></script>
+
+</body>
+
+</html>
