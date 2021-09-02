@@ -3,6 +3,10 @@
 
 <head>
 	<meta charset="UTF-8">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600|Open+Sans" rel="stylesheet"> 
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+	
+	<title>Pagos</title>
 	<meta name="viewport"
 		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<title>Restaurant</title>
@@ -21,6 +25,9 @@
 
 	<!-- General Styles -->
 	<link rel="stylesheet" href="./css/style.css">
+
+	<!-- General scripts -->
+	<script src="./js/main.js" ></script>
 
 </head>
 
@@ -144,7 +151,7 @@
 							</a>
 						</ul>
 						<p class="text-center">
-							<button type="button" class="btn btn-primary">Confirmar orden</button>
+							<button id="btn-abrir-popup" type="button" class="btn btn-primary" >Confirmar orden</button>
 						</p>
 					</div>
 				</div>
@@ -202,6 +209,35 @@
 			</div>
 		</div>
 	</footer>
+	<div class="overlay" id="overlay">
+		<div class="popup" id="popup">
+			<a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
+			<h4>Su Factura</h4>
+			<form action="">
+				<div class="contenedor-inputs">
+					<p>Cliente: <input type="text" name="nombre" size="5">
+					<p>Dirección: <input type="text" name="nombre" size="5"></p>
+					<p>Valor a pagar: <input type="text" name="nombre" size="5"></p>
+					<p>Tipo de pago:
+
+					
+						<input type="radio" name="boton" value="1">Debito bancario<br>
+						<input type="radio" name="boton" value="2">tarjetas<br>
+					
+
+					
+							<select name="menu" >
+								<option>tarjeta de debito</option>
+								<option>tarjeta corriente</option>
+								
+							  </select>
+	
+					
+				</div>
+				<input type="submit" class="btn-submit" value="Pagar">
+			</form>
+		</div>
+	</div>
 
 	<script>
 		var resultado = JSON.parse(localStorage['carrito']);
