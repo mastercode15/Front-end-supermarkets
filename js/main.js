@@ -58,7 +58,7 @@ function login() {
 	console.log(id, passwd)
 	var request = new XMLHttpRequest()
 
-	request.open('GET', 'http://3.89.143.66:9002/clientes/login/' + id + '/' + passwd, true)
+	request.open('GET', 'http://a0aeb907a57b74b498e855d83f38e6c2-819148902.us-east-1.elb.amazonaws.com:4005/clientes/login/' + id + '/' + passwd, true)
 	request.onload = function () {
 		// Begin accessing JSON data here
 		var user = this.response;
@@ -67,18 +67,18 @@ function login() {
 		console.log(user);
 		console.log(request.status);
 
-
-		if (user != '') {
-			alert('Inició de sesión exitoso');
-			var x = document.getElementById("icon-login");
-			if (x.style.display === "none") {
-				x.style.display = "block";
+		if (request.status == 200) {
+			if (user != '') {
+				alert('Inició de sesión exitoso');
 			} else {
-				x.style.display = "none";
+				alert('Los datos ingresados no coinciden');
 			}
 		} else {
-			alert('Los datos ingresados no coinciden');
+			alert('Ha ocurrido un error al iniciar sesión');
 		}
+
+
+
 	}
 
 	request.send()
@@ -101,16 +101,29 @@ function signUp() {
 	var direction = document.getElementById('direction').value;
 	var passwd = document.getElementById('password').value;
 
+	var finish = false;
+
 	var xhr = new XMLHttpRequest();
-	var url = "http://ace04ab1b5894421290658418ac3ed4f-499717577.us-east-1.elb.amazonaws.com:4003/clientes/";
+	var url = "http://a892aa7c71e81440f84676ba7147ef71-2005598993.us-east-1.elb.amazonaws.com:4003/clientes/";
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	xhr.onreadystatechange = function () {
-		if (xhr.readyState === 4 && xhr.status === 200) {
-			var json = JSON.parse(xhr.responseText);
-		};
+		console.log(xhr.status);
+		if (finish == false && xhr.status == 500) {
+			alert("Ya existe un usuario con esa identifiación");
+			finish = true;
+		}
+		else if (finish == false && xhr.status == 200) {
+			alert("Cuenta creada exitosamente");
+			finish = true;
+			window.location.replace("index.html");
+		}
+		// else if (finish == true) {
+		// 	alert("Hubo un error al crear su cuenta");
+		// }
 
 	}
+	console.log(xhr.status);
 	if (name != '' && ci != '' && direction != '' && passwd != '') {
 		var data = JSON.stringify({
 			"nombreCliente": name,
@@ -119,10 +132,8 @@ function signUp() {
 			"direccionCliente": direction
 		});
 		xhr.send(data);
-		alert("Cuenta creada exitosamente");
-		///window.location.replace("index.html");
-	} else {
-		alert("Hubo un error al crear su cuenta");
+
+
 	}
 
 }
