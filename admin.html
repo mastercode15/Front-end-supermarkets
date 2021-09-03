@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body style="text-align: center;">
+    <h1>Ventas diarias por supermercado</h1>
+
+
+
+    <label for="cars">Selecciona el supermercado</label>
+    <select name="cars" id="cars">
+        <option value="1">Supermaxi</option>
+        <option value="2">Mi comisariato</option>
+        <option value="3">Tia</option>
+        <option value="4">Aki</option>
+    </select>
+    <br><br>
+    <button onclick="valor()">
+        calcular
+    </button>
+
+
+    <p id="resultado"></p>
+
+    <script>
+        function valor() {
+            var supermarket = document.getElementById("cars").value;
+            console.log(supermarket);
+            var request = new XMLHttpRequest()
+
+            request.open('GET', 'https://6429-2800-bf0-241-11e7-f11c-ca2d-d984-43e0.ngrok.io/venta/supermecado/' + supermarket, true)
+            request.onload = function () {
+                // Begin accessing JSON data here
+                if (request.status == 500) {
+                    document.getElementById("resultado").textContent = "El supermercado no ha realizado ninguna venta el día de hoy";
+                } else {
+                    document.getElementById("resultado").textContent = "Valor: " + request.responseText;
+                }
+            }
+
+            request.send()
+
+        }
+    </script>
+</body>
+
+</html>

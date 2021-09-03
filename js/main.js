@@ -70,6 +70,8 @@ function login() {
 		if (request.status == 200) {
 			if (user != '') {
 				alert('Inició de sesión exitoso');
+				document.getElementById("logout").style.display = "block";
+				document.getElementById("login").style.display = "none";
 			} else {
 				alert('Los datos ingresados no coinciden');
 			}
