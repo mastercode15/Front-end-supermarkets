@@ -1,7 +1,7 @@
 
 var request = new XMLHttpRequest()
 
-request.open('GET', 'http://localhost/supermercado/src/', true)
+request.open('GET', 'https://api-supermercados.herokuapp.com/', true)
 request.onload = function () {
     // Begin accessing JSON data here
     var supermarket = JSON.parse(this.response)

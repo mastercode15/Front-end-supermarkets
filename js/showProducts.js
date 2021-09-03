@@ -1,7 +1,7 @@
 // Open a new connection, using the GET request on the URL endpoint
 var request = new XMLHttpRequest()
 
-request.open('GET', 'http://localhost/producto/src/', false)
+request.open('GET', 'https://api-producto5.herokuapp.com/', false)
 request.onload = function () {
     // Begin accessing JSON data here
     var productos = JSON.parse(this.response)
@@ -10,21 +10,6 @@ request.onload = function () {
 
     if (request.status >= 1 && request.status < 400) {
 
-        // var productos = JSON.parse(`[
-        //     {
-        //         "id_producto":"1",
-        //         "nombre_producto":"ARROZ",
-        //         "pro_descripcion":"arroz blanco",
-        //         "precio":"3.00",
-        //         "imagen_producto":"https://biodegradablesecuador.com/wp-content/uploads/2020/08/bolsa-papel-kraft-1.png"
-        //     },
-        //     {
-        //         "id_producto":"2",
-        //         "nombre_producto":"PAPAS",
-        //         "pro_descripcion":"CHOLA",
-        //         "precio":"5.00",
-        //         "imagen_producto":"https://biodegradablesecuador.com/wp-content/uploads/2020/08/bolsa-papel-kraft-1.png"
-        //     }]`)
 
         productos.forEach(element => {
 
